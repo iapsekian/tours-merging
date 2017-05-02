@@ -1,0 +1,31 @@
+{
+  "name": "tours-merging",
+  "version": "1.0.0",
+  "description": "Codes for merging Viator and Rezdy tours' information into one content type Tours",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/teammax/tours-merging.git"
+  },
+  "keywords": [
+    "Viator",
+    "Rezdy",
+    "tours",
+    "merge"
+  ],
+  "author": "Casper Yeh",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/teammax/tours-merging/issues"
+  },
+  "homepage": "https://github.com/teammax/tours-merging#readme",
+  "dependencies": {
+    "bson-ext": "^1.0.5",
+    "debug": "^2.6.3",
+    "mongodb": "^2.2.26",
+    "xml2js": "^0.4.17"
+  }
+}

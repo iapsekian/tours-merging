@@ -1,0 +1,37 @@
+SourceType;TargetType
+ACTIVITY;ACTIVITY
+Air, Helicopter & Balloon Tours;DAYTOUR
+CHARTER;CHARTER
+Classes & Workshops;LESSON
+Cruises, Sailing & Water Tours;DAYTOUR
+Cultural & Theme Tours;DAYTOUR
+CUSTOM;CUSTOM
+Day Trips & Excursions;DAYTOUR
+DAYTOUR;DAYTOUR
+EVENT;EVENT
+Family Friendly;EVENT
+Food, Wine & Nightlife;EVENT
+GIFT_CARD;GIFT_CARD
+Holiday & Seasonal Tours;DAYTOUR
+LESSON;LESSON
+Luxury & Special Occasions;PRIVATE_TOUR
+Multi-day & Extended Tours;MULTIDAYTOUR
+MULTIDAYTOUR;MULTIDAYTOUR
+Outdoor Activities;ACTIVITY
+Private & Custom Tours;CUSTOM
+PRIVATE_TOUR;PRIVATE_TOUR
+RENTAL;RENTAL
+Shopping & Fashion;ACTIVITY
+Shore Excursions;DAYTOUR
+Shows, Concerts & Sports;EVENT
+Sightseeing Tickets & Passes;TICKET
+Spa Tours;ACTIVITY
+Theme Parks;TICKET
+TICKET;TICKET
+Tours & Sightseeing;DAYTOUR
+TRANSFER;TRANSFER
+Transfers & Ground Transport;TRANSFER
+Viator VIP & Exclusive Tours;PRIVATE_TOUR
+Walking & Biking Tours;DAYTOUR
+Water Sports;ACTIVITY
+Weddings & Honeymoons;EVENT
