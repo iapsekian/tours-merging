@@ -9,6 +9,7 @@ var debugDev = debug('dev');
 const util = require('util');
 var MongoClient = require('mongodb').MongoClient;
 var ObjectID = require('mongodb').ObjectID;
+var mapping = require('./lib/mapping-util.js');
 
 var targetEnv = process.argv.slice(2)[0];
 var dbOPSwitch = process.argv.slice(3)[0];
@@ -64,13 +65,14 @@ if(productionEnv){
 
 //base configuration
 
-var txVocName = ['Attraction'];
-var ctnTypeName = ['Attraction', 'Attraction Details'];
+var txVocName = ['Tour Type','Tour Category'];
+var ctnTypeName = ['Tours'];
 
 var txVocNameCount = txVocName.length;
 var ctnTypeNameCount = ctnTypeName.length;
-var ctnProjection = {'_id':1, 'text': 1, 'workspace':1, 'live':1};
+var ctnProjection = {'_id':1, 'text': 1, 'workspace':1};
 var txVocId = {}, txTermsId = {}, ctnTypeId = {}, contents = {};
+var rtoursTypeId = {}, rtoursContents = [];
 
 Array.prototype.clean = (deleteValue) => {
 	for(var i = 0 ; i <this.length; i++) { 
@@ -95,7 +97,6 @@ var cleanArray = (orig, callback) => {
 	callback(updFlag ,newArray);
 }
 
-
 var dataPreparation = () => {
 
 	var dataReadyCount = 2;
@@ -109,6 +110,8 @@ var dataPreparation = () => {
 	var getTXMap = require('./lib/getTXTermsMap.js');
 	var options = {
 		'txVocName': txVocName,
+		//'txTermsFlag': true,
+		//'reversedListing': false,
 		'targetEnv': targetEnv,
 		'dbOPSwitch': dbOPSwitch
 	};
@@ -144,39 +147,114 @@ var dataPreparation = () => {
 }
 
 var dataValidation = () => {
-	var txAttractionValidationLog = '';
-	var attsJson = [];
-	var txShouldBeInserted = false;
-	ctnTypeName.forEach( (typeName) => {
-		var key = typeName.replace(/\s+/g,'');
-		var ctns = contents[key];
-		ctns.forEach( (ctn) => {
-			txVocName.forEach( (vocName) => {
-				var vocKey = vocName.replace(/\s+/g,'');
-				if(!txTermsId[vocKey][ctn.text]){
-					txShouldBeInserted = true;
-					txAttractionValidationLog += ctn.text + '\n';
-					var addFlag = true;
-					attsJson.forEach( (city) => {
-						if(city.Title === ctn.text)
-							addFlag = false;
-					});
-					if(addFlag)
-						attsJson.push({"Title":ctn.text});
-				}
+	var txTourTypeValidationLog = '', txTourCatValidationLog = '';
+	var typeJson = [], categoryJson = [];
+
+	//Prepare RTours data for tour category
+	//
+	var getRTours = () => {
+		var dataReadyCount = 1;
+		var wait4DataReady = () => {
+			dataReadyCount--;
+			if(!dataReadyCount){
+				validation();
+			}
+		}
+
+		var getRToursTypesId = require('./lib/getContentTypeId.js');
+		var options1 = {
+			'ctnTypeName': ['RTours'],
+			'targetEnv': targetEnv,
+			'dbOPSwitch': dbOPSwitch
+		};
+
+		getRToursTypesId(options1, (types)=>{
+			rtoursTypeId = types;
+
+			var getRToursContents = require('./lib/getContents.js');
+			options2 = {
+				ctnTypeId: rtoursTypeId,
+				projection: ctnProjection,
+				targetEnv: targetEnv,
+				dbOPSwitch: dbOPSwitch
+			};
+			getRToursContents(options2, (ctns)=>{
+				rtoursContents = ctns;
+				wait4DataReady();
 			});
 		});
-	});	
-
-	fs.writeFileSync('./logs/notExistedInTaxonomyAttraction-' + targetEnv + '.log', txAttractionValidationLog);
-	fs.writeFileSync('./mapping/txAtts.json', JSON.stringify(attsJson));
-
-	if(txShouldBeInserted){
-		console.log('****** There still are taxonomy data which should be dealed with! Please excute "updateTXThemesCityAttTourTypeCatDest.js"!! ******');
-		endProgram();
-	} else {
-		dataProcessing();
 	}
+
+	var validation = () => {
+		var txShouldBeInserted = false;
+		ctnTypeName.forEach( (typeName) => {
+			var key = typeName.replace(/\s+/g,'');
+			var ctns = contents[key];
+			ctns.forEach( (ctn) => {
+				txShouldBeInserted = false;
+				txVocName.forEach( (vocName) => {
+					var vocKey = vocName.replace(/\s+/g,'');
+					var source = '', termKey = '';
+					if(vocName === 'Tour Type'){
+						if(ctn.workspace.fields.productType){
+							source = ctn.workspace.fields.productType;
+							if(!util.isNullOrUndefined(source))
+								termKey = mapping.getTargetTourType(source);
+						}
+					} else if(vocName === 'Tour Category'){
+						rtoursContents.RTours.forEach( (rtour) => {
+							if(rtour.workspace.fields.productCode === ctn.workspace.fields.productCode){
+								source = rtour.workspace.fields.tourCategory;
+								if(!util.isNullOrUndefined(source))
+									termKey = mapping.getTargetTourCategory(source);
+							}
+						});
+					}
+					if(!txTermsId[vocKey][termKey]){
+						txShouldBeInserted = true;
+						if(!util.isNullOrUndefined(source)){
+							if(vocKey === 'TourType'){
+								txTourTypeValidationLog += termKey + '\n';
+								var addFlag = true;
+								typeJson.forEach( (type) => {
+									if(type.SourceType === source)
+										addFlag = false;
+								});
+								if(addFlag){
+									typeJson.push({"SourceType":source,"TargetType":termKey});
+								}
+							} else if(vocKey === 'TourCategory'){
+								txTourCatValidationLog += termKey + '\n';
+								var tcAddFlag = true;
+								categoryJson.forEach( (cat) => {
+									if(cat.SourceCategory === source)
+										tcAddFlag = false;
+								});
+								if(tcAddFlag){
+									categoryJson.push({"SourceCategory":source,"TargetCategory":termKey});
+								}
+							}
+						}
+					}
+				});
+			});
+		});	
+
+		fs.writeFileSync('./logs/notExistedInTaxonomyTourType-' + targetEnv + '.log', txTourTypeValidationLog);
+		fs.writeFileSync('./logs/notExistedInTaxonomyTourCategory-' + targetEnv + '.log', txTourCatValidationLog);
+		fs.writeFileSync('./mapping/type-new.json', JSON.stringify(typeJson));
+		fs.writeFileSync('./mapping/category-new.json', JSON.stringify(categoryJson));
+
+		if(txShouldBeInserted){
+			console.log('****** There still are taxonomy data which should be dealed with! Please excute "updateTXThemesCityTourTypeCatDest.js"!! ******');
+			endProgram();
+		} else {
+			dataProcessing();
+		}
+	}
+
+	// starting point
+	getRTours();
 }
 
 var dataProcessing = () => {
@@ -216,38 +294,71 @@ var dataProcessing = () => {
 					var updFlag = false;
 					txVocs.forEach( (txVoc) => {
 						var vocId = txVocId[txVoc];
-						var termId = txTermsId[txVoc][text];
 						var tmpTermsArray = [];
+						var termId = '', termKey = '', source = '';
 
 						//clean Array
 						if(ctn.workspace.taxonomy[vocId]){
 							if(Array.isArray(ctn.workspace.taxonomy[vocId])){
-								ctn.workspace.taxonomy[vocId].clean(undefined);
-								ctn.workspace.taxonomy[vocId].clean(null);
-								ctn.workspace.taxonomy[vocId].clean('');
+								cleanArray(ctn.workspace.taxonomy[vocId], (uf, newArr) => {
+									updFlag = uf;
+									ctn.workspace.taxonomy[vocId] = newArr;
+								});
+							} else {
+								if(util.isNullOrUndefined(ctn.workspace.taxonomy[vocId]))
+									ctn.workspace.taxonomy[vocId] = '';
 							}
 						}						
 
+						if(txVoc === 'TourType'){
+							if(ctn.workspace.fields.productType){
+								source = ctn.workspace.fields.productType;
+								if(!util.isNullOrUndefined(source))
+									termKey = mapping.getTargetTourType(source);
+							}
+						} else if(txVoc === 'TourCategory'){
+							rtoursContents.RTours.forEach( (rtour) => {
+								if(rtour.workspace.fields.productCode === ctn.workspace.fields.productCode){
+									source = rtour.workspace.fields.tourCategory;
+									if(!util.isNullOrUndefined(source))
+										termKey = mapping.getTargetTourCategory(source);
+								}
+							});
+						}
+						if(termKey)
+							termId = txTermsId[txVoc][termKey];
+
+
 						if(ctn.workspace.taxonomy[vocId]){
-							if(Array.isArray(ctn.workspace.taxonomy[vocId])){
-								tmpTermsArray = ctn.workspace.taxonomy[vocId];
-								if(tmpTermsArray.indexOf(termId) === -1){
-									tmpTermsArray.push(termId);
-									updFlag = true;
+							if(txVoc === 'TourCategory'){
+								if(Array.isArray(ctn.workspace.taxonomy[vocId])){
+									tmpTermsArray = ctn.workspace.taxonomy[vocId];
+									if(tmpTermsArray.indexOf(termId) === -1){
+										tmpTermsArray.push(termId);
+										updFlag = true;
+									}
+									ctn.workspace.taxonomy[vocId] = tmpTermsArray;
+								} else{
+									tmpTermsArray.push(ctn.workspace.taxonomy[vocId]);
+									if(tmpTermsArray.indexOf(termId) === -1){
+										tmpTermsArray.push(termId);
+										updFlag = true;
+									}
+									ctn.workspace.taxonomy[vocId] = tmpTermsArray;
 								}
-								ctn.workspace.taxonomy[vocId] = tmpTermsArray;
-							} else{
-								tmpTermsArray.push(ctn.workspace.taxonomy[vocId]);
-								if(tmpTermsArray.indexOf(termId) === -1){
-									tmpTermsArray.push(termId);
-									updFlag = true;
-								}
-								ctn.workspace.taxonomy[vocId] = tmpTermsArray;
+							} else if(txVoc === 'TourType'){
+								ctn.workspace.taxonomy[vocId] = termId;
+								updFlag = true;
 							}
 						} else {
-							updFlag = true;
-							tmpTermsArray.push(termId);
-							ctn.workspace.taxonomy[vocId] = tmpTermsArray;
+							if(txVoc === 'TourCategory'){
+								updFlag = true;
+								tmpTermsArray.push(termId);
+								ctn.workspace.taxonomy[vocId] = tmpTermsArray;
+							} else if(txVoc === 'TourType'){
+								updFlag = true;
+								ctn.workspace.taxonomy[vocId] = termId;
+							}
 						}
 					});
 
@@ -289,15 +400,17 @@ var dataProcessing = () => {
 		if(operateDB){
 			start();
 		} else {
+			console.log('operateDB=false so escape....');
 			endProgram();
 		}
 	} else {
+		console.log('Nothing to be dealed with .......');
 		endProgram();
 	}
 }
 
 var endProgram = () => {
-	console.log('*** updateCityTXTourDestCity.js Finished!! ***');	
+	console.log('*** updateToursTXTourTypeCategory.js Finished!! ***');	
 }
 
 //Starting point

@@ -62,7 +62,7 @@ if(productionEnv){
 	var mdbUrl = 'mongodb://tst.tourbooks.cc:27017/tourbooks';
 }
 
-var txVocName = ['Tour Type','Tour Category','Tour Destination','City','Themes','Attraction','Destination'];
+var txVocName = ['Tour Type','Tour Category','Tour Destination','City','Themes','Attraction','Destination','Country','State / Province'];
 var txVocNameCount = txVocName.length;
 var txVocId = {}, txTermsId = {};
 	// txTermsId = {
@@ -166,7 +166,8 @@ MongoClient.connect(mdbUrl, (err, db) => {
 	var themesToBeInserted = [];
 	var attractionToBeInserted = [];
 	var destinationToBeInserted = [];
-	var txnmyInserted = false;
+	var countryToBeInserted = [];
+	var stateToBeInserted = [];
 
 	var validateData = () =>{
 		var cats = require('./mapping/category.json');
@@ -176,6 +177,9 @@ MongoClient.connect(mdbUrl, (err, db) => {
 		var themes = require('./mapping/themes.json');
 		var atts = require('./mapping/txAtts.json'); //should run updateContextualizationBTWAtts.js first
 		var tduls = require('./mapping/tdul.json');
+		var countries = require('./mapping/country.json');
+		var states = require('./mapping/stateProvince.json');
+
 
 		types.forEach((type)=>{
 			if(!txTermsId['TourType'][type.TargetType]){
@@ -226,6 +230,20 @@ MongoClient.connect(mdbUrl, (err, db) => {
 			}
 		});
 
+		countries.forEach((country)=>{
+			if(!txTermsId['Country'][country.Title]){
+				if(-1 === countryToBeInserted.indexOf(country.Title))
+					countryToBeInserted.push(country.Title);
+			}
+		});
+
+		states.forEach((state)=>{
+			if(!txTermsId['State/Province'][state.Title]){
+				if(-1 === stateToBeInserted.indexOf(state.Title))
+					stateToBeInserted.push(state.Title);
+			}
+		});
+
 		fs.writeFileSync('./logs/tourTypeToBeInserted-' + targetEnv + '.json', JSON.stringify(tourTypeToBeInserted));
 		fs.writeFileSync('./logs/tourCategoryToBeInserted-' + targetEnv + '.json', JSON.stringify(tourCategoryToBeInserted));
 		fs.writeFileSync('./logs/tourDestinationToBeInserted-' + targetEnv + '.json', JSON.stringify(tourDestinationToBeInserted));
@@ -233,8 +251,10 @@ MongoClient.connect(mdbUrl, (err, db) => {
 		fs.writeFileSync('./logs/themesToBeInserted-' + targetEnv + '.json', JSON.stringify(themesToBeInserted));
 		fs.writeFileSync('./logs/attractionToBeInserted-' + targetEnv + '.json', JSON.stringify(attractionToBeInserted));
 		fs.writeFileSync('./logs/destinationToBeInserted-' + targetEnv + '.json', JSON.stringify(destinationToBeInserted));
+		fs.writeFileSync('./logs/countryToBeInserted-' + targetEnv + '.json', JSON.stringify(countryToBeInserted));
+		fs.writeFileSync('./logs/stateToBeInserted-' + targetEnv + '.json', JSON.stringify(stateToBeInserted));
 
-		if(tourCategoryToBeInserted.length || tourTypeToBeInserted.length || tourDestinationToBeInserted.length || cityToBeInserted.length || themesToBeInserted.length || attractionToBeInserted.length || destinationToBeInserted.length){
+		if(tourCategoryToBeInserted.length || tourTypeToBeInserted.length || tourDestinationToBeInserted.length || cityToBeInserted.length || themesToBeInserted.length || attractionToBeInserted.length || destinationToBeInserted.length || countryToBeInserted.length || stateToBeInserted.length){
 			if(operateDB){
 				insertData();
 			} else {
@@ -285,8 +305,10 @@ MongoClient.connect(mdbUrl, (err, db) => {
 		var themesInsertLog = '';
 		var attractionInsertLog = '';
 		var destinationInsertLog = '';
+		var countryInsertLog = '';
+		var stateInsertLog = '';
 
-		var allInsertCount = 7;
+		var allInsertCount = 9;
 		var wait4AllInsertionEnd = ()=>{
 			allInsertCount--;
 			if(!allInsertCount){
@@ -297,6 +319,8 @@ MongoClient.connect(mdbUrl, (err, db) => {
 				fs.writeFileSync('./logs/themesInsertLog-' + targetEnv + '.log', themesInsertLog);
 				fs.writeFileSync('./logs/attractionInsertLog-' + targetEnv + '.log', attractionInsertLog);
 				fs.writeFileSync('./logs/destinationInsertLog-' + targetEnv + '.log', destinationInsertLog);
+				fs.writeFileSync('./logs/countryInsertLog-' + targetEnv + '.log', countryInsertLog);
+				fs.writeFileSync('./logs/stateInsertLog-' + targetEnv + '.log', stateInsertLog);
 				endProgram();
 			}
 		}
@@ -586,12 +610,94 @@ MongoClient.connect(mdbUrl, (err, db) => {
 
 		} else {
 			wait4AllInsertionEnd();
+		}
+
+		if(countryToBeInserted.length){
+			debugDev('TX Country Insertion Starts......');
+
+			var countryInsertCount = countryToBeInserted.length;
+			var wait4CountryInsertionEnd = () => {
+				countryInsertCount--;
+				if(!countryInsertCount){
+					wait4AllInsertionEnd();
+				}
+			};
+
+
+			countryToBeInserted.forEach((country)=>{
+				var txTermDoc = (JSON.parse(JSON.stringify(txTermDocTemplate)));
+
+				txTermDoc.text = country;
+				txTermDoc.vocabularyId = txVocId.Country;
+				txTermDoc.i18n.en.text = country;
+				txTermDoc.createTime = parseInt((Date.now()/1000).toFixed(0));
+				txTermDoc.lastUpdateTime = txTermDoc.createTime;
+
+				cltTXTerms.insertOne(txTermDoc,insertOptions)
+					.then((r)=>{
+						if(1 === r.result.ok){
+							debugDev('Insert taxonomy Country - term - ' + country + ' - Succeeded!!');
+							countryInsertLog += 'Insert taxonomy Country - term - ' + country + ' - Succeeded!!' + '\n';
+							wait4CountryInsertionEnd();						
+						}
+					})
+					.catch((e)=>{
+						console.log('Insert taxonomy Country - term - ' + country + ' -  Exception Error Happened!! - ' + e);
+						countryInsertLog += 'Insert taxonomy Country - term - ' + country + ' -  Exception Error Happened!! - ' + e + '\n';
+						wait4CountryInsertionEnd();
+					});
+
+			});
+
+		} else {
+			wait4AllInsertionEnd();
+		}	
+
+		if(stateToBeInserted.length){
+			debugDev('TX State / Province Insertion Starts......');
+
+			var stateInsertCount = stateToBeInserted.length;
+			var wait4StateInsertionEnd = () => {
+				stateInsertCount--;
+				if(!stateInsertCount){
+					wait4AllInsertionEnd();
+				}
+			};
+
+
+			stateToBeInserted.forEach((state)=>{
+				var txTermDoc = (JSON.parse(JSON.stringify(txTermDocTemplate)));
+
+				txTermDoc.text = state;
+				txTermDoc.vocabularyId = txVocId['State/Province'];
+				txTermDoc.i18n.en.text = state;
+				txTermDoc.createTime = parseInt((Date.now()/1000).toFixed(0));
+				txTermDoc.lastUpdateTime = txTermDoc.createTime;
+
+				cltTXTerms.insertOne(txTermDoc,insertOptions)
+					.then((r)=>{
+						if(1 === r.result.ok){
+							debugDev('Insert taxonomy State / Province - term - ' + state + ' - Succeeded!!');
+							stateInsertLog += 'Insert taxonomy State / Province - term - ' + state + ' - Succeeded!!' + '\n';
+							wait4StateInsertionEnd();						
+						}
+					})
+					.catch((e)=>{
+						console.log('Insert taxonomy State / Province - term - ' + state + ' -  Exception Error Happened!! - ' + e);
+						stateInsertLog += 'Insert taxonomy State / Province - term - ' + state + ' -  Exception Error Happened!! - ' + e + '\n';
+						wait4StateInsertionEnd();
+					});
+
+			});
+
+		} else {
+			wait4AllInsertionEnd();
 		}	
 	}
 
 	var endProgram = ()=>{
 		db.close();
-		console.log('*** updateTXThemesCityAttTourTypeCatDest Finished!! ***');
+		console.log('*** updateTXTerms.js Finished!! ***');
 	}
 
 	// Starting point

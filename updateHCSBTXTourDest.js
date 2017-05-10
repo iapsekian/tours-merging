@@ -1,7 +1,7 @@
 /*jshint esversion: 6 */
 
-//This program will include a external json file - rezdytours.json as the updateing source for taxonomy Tour Destination, Themes and Price 
-//if you want to update taxonomy Tour Type and Tour Category, you should use another one - updateToursTXTourTypeCategory.js
+//This program will include a external json file - hscb.json as the updateing source for taxonomy Tour Destination
+//
 
 var fs = require('fs');
 var debug = require('debug');
@@ -64,14 +64,14 @@ if(productionEnv){
 
 //base configuration
 
-var txVocName = ['Tour Destination','Themes','Price'];
-var ctnTypeName = ['Tours'];
+var txVocName = ['Tour Destination'];
+var ctnTypeName = ['HSCB Link'];
 
 var txVocNameCount = txVocName.length;
 var ctnTypeNameCount = ctnTypeName.length;
 var ctnProjection = {'_id':1, 'text': 1, 'workspace':1};
-var txVocId = {}, txTermsId = {}, ctnTypeId = {}, contents = {}, toursNotExisted = [];
-var rezdyTours = require('./mapping/rezdytours.json');
+var txVocId = {}, txTermsId = {}, ctnTypeId = {}, contents = {};
+var hcsbLinks = require('./mapping/hscb.json');
 
 var cleanArray = (orig, callback) => {
 	var newArray = new Array();
@@ -136,17 +136,15 @@ var dataPreparation = () => {
 }
 
 var dataValidation = () => {
-	var txPriceValidationLog = '', txTDValidationLog = '', txThemesValidationLog = '', rezdyToursValidationLog = '';
-	var priceJson = [], destJson = [], themesJson = [];
+	var txTDValidationLog = '', hscbValidationLog = '';
+	var destJson = [];
 	var txShouldBeInserted = false;
 
-	rezdyTours.forEach( (tour) => {
-		debugDev('tour["Tour Code"] = ' + tour["Tour Code"]);
+	hcsbLinks.forEach( (hcsb) => {
+		debugDev('hcsb.Title = ' + hcsb.Title);
 
-		var themes = [];
-		if(tour.Themes.trim().length)	themes = tour.Themes.trim().split(',');
 		var tourDestinations = [];
-		if(tour['Tour Destination'].trim().length)	tourDestinations = tour['Tour Destination'].trim().split(',');
+		if(hcsb['Tour Destination'].trim().length)	tourDestinations = hcsb['Tour Destination'].trim().split(',');
 
 		txVocName.forEach( (vocName) => {
 			var vocKey = vocName.replace(/\s+/g,'');
@@ -169,37 +167,6 @@ var dataValidation = () => {
 						}
 					});
 				}
-			} else if (vocName === 'Price'){
-				if(!txTermsId[vocKey][tour.Price]){
-					txShouldBeInserted = true;
-					txPriceValidationLog += tour.Price + '\n';
-					var addFlag = true;
-					priceJson.forEach( (price) => {
-						if(price.Title === tour.Price)
-							addFlag = false;
-					});
-					if(addFlag)
-						priceJson.push({"Title":tour.Price});
-				}
-			} else if(vocName === 'Themes') {
-				if(themes.length){
-					themes.forEach( (theme) => {
-						var tmpTheme = theme.trim();
-						if(tmpTheme.length){
-							if(!txTermsId[vocKey][tmpTheme]){
-								txShouldBeInserted = true;
-								txThemesValidationLog += tmpTheme + '\n';
-								var themeAddFlag = true;
-								themesJson.forEach( (t) => {
-									if(t.Title === tmpTheme)
-										themeAddFlag = false;
-								});
-								if(themeAddFlag)
-									themesJson.push({"Title":tmpTheme});
-							}																		
-						}
-					});
-				}
 			}
 		});
 
@@ -209,22 +176,17 @@ var dataValidation = () => {
 			ctns = contents[key];
 			var notExisted = true;
 			ctns.forEach( (ctn) => {
-				if(ctn.workspace.fields.productCode === tour["Tour Code"])	notExisted = false;
+				if(ctn.text=== hcsb.Title)	notExisted = false;
 			});
 			if(notExisted){
-				rezdyToursValidationLog += tour["Tour Code"] + '\n';
-				toursNotExisted.push(tour["Tour Code"]);
+				hscbValidationLog += hcsb.Title + '\n';
 			}
 		});	
 	});
 
-	fs.writeFileSync('./logs/notExistedInTaxonomyPrice-' + targetEnv + '.log', txPriceValidationLog);
 	fs.writeFileSync('./logs/notExistedInTaxonomyTourDest-' + targetEnv + '.log', txTDValidationLog);
-	fs.writeFileSync('./logs/notExistedInTaxonomyThemes-' + targetEnv + '.log', txThemesValidationLog);
-	fs.writeFileSync('./logs/notExistedInContentTours-' + targetEnv + '.log', rezdyToursValidationLog);
-	fs.writeFileSync('./mapping/price.json', JSON.stringify(priceJson));
+	fs.writeFileSync('./logs/notExistedInContentHSCBLink-' + targetEnv + '.log', hscbValidationLog);
 	fs.writeFileSync('./mapping/dest.json', JSON.stringify(destJson));
-	fs.writeFileSync('./mapping/themes.json', JSON.stringify(themesJson));
 
 	if(txShouldBeInserted){
 		console.log('****** There still are taxonomy data which should be dealed with! Please excute "updateTXThemesCityTourTypeCatDest.js"!! ******');
@@ -239,7 +201,7 @@ var dataProcessing = () => {
 	// var allContentsCount = allContents.length;
 	var txVocs = Object.keys(txVocId);
 	var txVocsCount = txVocs.length;
-	var ctnsToursUpdLog = '';
+	var ctnsHCSBLinkUpdLog = '';
 
 	var start = () => {
 		var dbConnection = MongoClient.connect(mdbUrl);
@@ -247,24 +209,24 @@ var dataProcessing = () => {
 		dbConnection.then( (db) => {
 			var cltContents = db.collection('Contents');
 
-			var rezdyToursCount = rezdyTours.length;
-			var wait4RezdyToursEnd = () => {
-				rezdyToursCount--;
-				if(!rezdyToursCount){
+			var hcsbLinksCount = hcsbLinks.length;
+			var wait4HCSBLinkEnd = () => {
+				hcsbLinksCount--;
+				if(!hcsbLinksCount){
 					db.close();
 					// fs.writeFileSync('./logs/contentsAfterDataProcessing-' + 'Tours' + '-' + targetEnv + '.json', JSON.stringify(contents)); //for debuging
-					fs.writeFileSync('./logs/ContentsRezdyToursUpdatingLog-'+targetEnv+'.log', ctnsToursUpdLog);
+					fs.writeFileSync('./logs/ContentsHSCBLinkUpdatingLog-'+targetEnv+'.log', ctnsHCSBLinkUpdLog);
 					endProgram();
 				}
 			}
 
-			rezdyTours.forEach( (tour) => {
+			hcsbLinks.forEach( (hcsb) => {
 
 				var allContentsCount = allContents.length;
 				var wait4AllContentsEnd = () => {
 					allContentsCount--;
 					if(!allContentsCount){
-						wait4RezdyToursEnd();
+						wait4HCSBLinkEnd();
 					}
 				}
 
@@ -280,15 +242,11 @@ var dataProcessing = () => {
 					}
 
 					ctns.forEach( (ctn) => {
-						var productCode = ctn.workspace.fields.productCode;
+						var text = ctn.text;
 						var updFlag = false;
-						if(tour['Tour Code'] === productCode){
-							var tourProductCode = tour['Tour Code'];
-							var txPrice = tour.Price;
-							var txThemes = [];
-							if(tour.Themes.trim().length)	txThemes = tour.Themes.trim().split(',');
+						if(hcsb.Title === text){
 							var txTourDestinations = [];
-							if(tour['Tour Destination'].trim().length)	txTourDestinations = tour['Tour Destination'].trim().split(',');
+							if(hcsb['Tour Destination'].trim().length)	txTourDestinations = hcsb['Tour Destination'].trim().split(',');
 
 							txVocs.forEach( (txVoc) => {
 								var vocId = txVocId[txVoc];
@@ -311,66 +269,12 @@ var dataProcessing = () => {
 									}
 								}
 
-								if(txVoc === 'Price'){
-									termId = txTermsId[txVoc][txPrice];
-									if(ctn.workspace.taxonomy[vocId]){
-										if(Array.isArray(ctn.workspace.taxonomy[vocId])){
-											tmpTermsArray = ctn.workspace.taxonomy[vocId];
-											if(tmpTermsArray.indexOf(termId) === -1){
-												tmpTermsArray.push(termId);
-												updFlag = true;
-											}
-											ctn.workspace.taxonomy[vocId] = tmpTermsArray;
-										} else{
-											tmpTermsArray.push(ctn.workspace.taxonomy[vocId]);
-											if(tmpTermsArray.indexOf(termId) === -1){
-												tmpTermsArray.push(termId);
-												updFlag = true;
-											}
-											ctn.workspace.taxonomy[vocId] = tmpTermsArray;
-										}
-									} else {
-										updFlag = true;
-										tmpTermsArray.push(termId);
-										ctn.workspace.taxonomy[vocId] = tmpTermsArray;
-									}
-								} else if(txVoc === 'TourDestination'){
+								if(txVoc === 'TourDestination'){
 									if(txTourDestinations.length){
 										txTourDestinations.forEach( (dest) => {
 											var tmpDest = dest.trim();
 											if(tmpDest.length){
 												termId = txTermsId[txVoc][tmpDest];
-
-												if(ctn.workspace.taxonomy[vocId]){
-													if(Array.isArray(ctn.workspace.taxonomy[vocId])){
-														tmpTermsArray = ctn.workspace.taxonomy[vocId];
-														if(tmpTermsArray.indexOf(termId) === -1){
-															tmpTermsArray.push(termId);
-															updFlag = true;
-														}
-														ctn.workspace.taxonomy[vocId] = tmpTermsArray;
-													} else{
-														tmpTermsArray.push(ctn.workspace.taxonomy[vocId]);
-														if(tmpTermsArray.indexOf(termId) === -1){
-															tmpTermsArray.push(termId);
-															updFlag = true;
-														}
-														ctn.workspace.taxonomy[vocId] = tmpTermsArray;
-													}
-												} else {
-													updFlag = true;
-													tmpTermsArray.push(termId);
-													ctn.workspace.taxonomy[vocId] = tmpTermsArray;
-												}
-											}
-										});
-									}
-								} else if(txVoc === 'Themes'){
-									if(txThemes.length){
-										txThemes.forEach( (theme) => {
-											var tmpTheme = theme.trim();
-											if(tmpTheme.length){
-												termId = txTermsId[txVoc][tmpTheme];
 
 												if(ctn.workspace.taxonomy[vocId]){
 													if(Array.isArray(ctn.workspace.taxonomy[vocId])){
@@ -411,13 +315,13 @@ var dataProcessing = () => {
 
 							cltContents.updateOne(filter, update)
 								.then((r) => {
-									debugDev('Content - ' + key + ': ' + productCode + ' has been updated successfully!');
-									ctnsToursUpdLog += 'Content - ' + key + ': ' + productCode + ' has been updated successfully!\n';
+									debugDev('Content - ' + key + ': ' + text + ' has been updated successfully!');
+									ctnsHCSBLinkUpdLog += 'Content - ' + key + ': ' + text + ' has been updated successfully!\n';
 									wait4ctnsEnd();
 								})
 								.catch((e) => {
-									debugDev('Content - ' + key + ': ' + productCode + ' failed to be updated! - ' + e);
-									ctnsToursUpdLog += 'Content - ' + key + ': ' + productCode + ' failed to be updated! - '+e+'\n';
+									debugDev('Content - ' + key + ': ' + text + ' failed to be updated!' + e);
+									ctnsHCSBLinkUpdLog += 'Content - ' + key + ': ' + text + ' failed to be updated! '+e+'\n';
 									wait4ctnsEnd();
 								});
 							
@@ -449,7 +353,7 @@ var dataProcessing = () => {
 }
 
 var endProgram = () => {
-	console.log('*** updateRezdyToursTXThemesTourDestCity.js Finished!! ***');	
+	console.log('*** updatHCSBTXTourDest.js Finished!! ***');	
 }
 
 //Starting point

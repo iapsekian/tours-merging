@@ -69,8 +69,8 @@ var ctnTypeName = ['City'];
 
 var txVocNameCount = txVocName.length;
 var ctnTypeNameCount = ctnTypeName.length;
-var ctnProjection = {'_id':1, 'text': 1, 'workspace':1, 'live':1};
-var txVocId = {}, txTermsId = {}, cntTypeId = {}, contents = {};
+var ctnProjection = {'_id':1, 'text': 1, 'workspace':1};
+var txVocId = {}, txTermsId = {}, ctnTypeId = {}, contents = {};
 
 Array.prototype.clean = (deleteValue) => {
 	for(var i = 0 ; i <this.length; i++) { 
@@ -113,11 +113,11 @@ var dataPreparation = () => {
 	};
 
 	getContentTypesId(options1, (types)=>{
-		cntTypeId = types;
+		ctnTypeId = types;
 
 		var getContents = require('./lib/getContents.js');
 		options2 = {
-			ctnTypeId: cntTypeId,
+			ctnTypeId: ctnTypeId,
 			projection: ctnProjection,
 			targetEnv: targetEnv,
 			dbOPSwitch: dbOPSwitch

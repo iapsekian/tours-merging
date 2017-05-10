@@ -70,7 +70,7 @@ var ctnTypeName = ['Attraction'];
 var txVocNameCount = txVocName.length;
 var ctnTypeNameCount = ctnTypeName.length;
 var ctnProjection = {'_id':1, 'text': 1, 'workspace':1, 'live':1};
-var txVocId = {}, txTermsId = {}, cntTypeId = {}, contents = {};
+var txVocId = {}, txTermsId = {}, ctnTypeId = {}, contents = {};
 var atts = require('./mapping/att.json');
 
 var cleanArray = (orig, callback) => {
@@ -118,11 +118,11 @@ var dataPreparation = () => {
 	};
 
 	getContentTypesId(options1, (types)=>{
-		cntTypeId = types;
+		ctnTypeId = types;
 
 		var getContents = require('./lib/getContents.js');
 		options2 = {
-			ctnTypeId: cntTypeId,
+			ctnTypeId: ctnTypeId,
 			projection: ctnProjection,
 			targetEnv: targetEnv,
 			dbOPSwitch: dbOPSwitch

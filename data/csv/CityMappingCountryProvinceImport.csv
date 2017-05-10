@@ -1,0 +1,733 @@
+"City","Country","State / Province"
+"Aberdeen","United Kingdom","Scotland"
+"Abidjan","Ivory Coast",
+"Abu Dhabi","United Arab Emirates",
+"Abuja","Nigeria",
+"Accra","Ghana",
+"Addis Ababa","Ethiopia",
+"Adelaide","Australia","South Australia"
+"Adirondacks","United States of America","New York"
+"Aegean Coast","Turkey",
+"Agadir","Morocco",
+"Agra","India",
+"Ahmedabad","India",
+"Aitutaki","Cook Islands",
+"Al Ain","United Arab Emirates",
+"Albuquerque","United States of America","New Mexico"
+"Alderney","United Kingdom","Channel Islands"
+"Aleppo","Syria",
+"Algiers","Algeria",
+"Alicante","Spain",
+"Alice Springs","Australia","Northern Territory"
+"Almaty","Kazakhstan",
+"Alsace Lorraine","France",
+"Amalfi Coast","Italy",
+"Amarillo","United States of America","Texas"
+"Amazon Basin","Peru",
+"Amber Coast","Dominican Republic",
+"Amman","Jordan",
+"Amritsar","India",
+"Amsterdam","Netherlands",
+"Anchorage","United States of America","Alaska"
+"Ankara","Turkey",
+"Annapolis","United States of America","Maryland"
+"Antananarivo","Madagascar",
+"Antigua","Antigua and Barbuda",
+"Antigua Guatemala","Guatemala",
+"Antwerp","Belgium",
+"Aqaba","Jordan",
+"Arequipa","Peru",
+"Asheville","United States of America","North Carolina"
+"Ashgabat","Turkmenistan",
+"Astana","Kazakhstan",
+"Asuncion","Paraguay",
+"Athens","Greece",
+"Atlanta","United States of America","Georgia"
+"Auckland","New Zealand",
+"Austin","United States of America","Texas"
+"Austrian Alps","Austria",
+"Avignon","France",
+"Baja California","Mexico",
+"Baku","Azerbaijan",
+"Bali","Indonesia",
+"Baltimore","United States of America","Maryland"
+"Bandar Seri Begawan","Brunei",
+"Bangkok","Thailand",
+"Barbuda","Antigua and Barbuda",
+"Barcelona","Spain",
+"Basel","Switzerland",
+"Basque Country","France",
+"Bath","United Kingdom","England"
+"Baton Rouge","United States of America","Louisiana"
+"Battlefields","South Africa",
+"Bazaruto Archipelago","Mozambique",
+"Beijing","China",
+"Beirut","Lebanon",
+"Belfast","United Kingdom","Northern Ireland"
+"Belgrade","Serbia",
+"Belize City","Belize",
+"Belo Horizonte","Brazil",
+"Bengaluru","India",
+"Bergen","Norway",
+"Berlin","Germany",
+"Bernese Oberland","Switzerland",
+"Biarritz","France",
+"Big Island","United States of America","Hawaii"
+"Bilbao","Spain",
+"Billings","United States of America","Montana"
+"Billund","Denmark",
+"Biloxi","United States of America","Mississippi"
+"Birmingham","United Kingdom","England"
+"Birmingham","United States of America","Alabama"
+"Bishkek","Kyrgyzstan",
+"Black Hills","United States of America","South Dakota"
+"Black Sea Coast","Bulgaria",
+"Blantyre","Malawi",
+"Bloemfontein","South Africa",
+"Bogota","Colombia",
+"Boise","United States of America","Idaho"
+"Bologna","Italy",
+"Bora Bora","Tahiti and French Polynesia",
+"Bordeaux","France",
+"Boston","United States of America","Massachusetts"
+"Brasilia","Brazil",
+"Bratislava","Slovakia",
+"Brecon Beacons","United Kingdom","Wales"
+"Bridgetown","Barbados",
+"Brighton","United Kingdom","England"
+"Brisbane","Australia","Queensland"
+"Bristol","United Kingdom","England"
+"Brittany","France",
+"Bruges","Belgium",
+"Brussels","Belgium",
+"Bucharest","Romania",
+"Budapest","Hungary",
+"Buenos Aires","Argentina",
+"Bulawayo","Zimbabwe",
+"Burlington","United States of America","Vermont"
+"Busan","South Korea",
+"Cairns","Australia","Queensland"
+"Cairo","Egypt",
+"Cajamarca","Peru",
+"Calgary","Canada","Alberta"
+"Cambridge","United Kingdom","England"
+"Canadian Rocky Mountains","Canada","Alberta"
+"Canberra","Australia","Capital Territory"
+"Cancun","Mexico",
+"Cape Cod","United States of America","Massachusetts"
+"Cape Town","South Africa",
+"Cape Winelands","South Africa",
+"Cappadocia","Turkey",
+"Caracas","Venezuela",
+"Cardiff","United Kingdom","Wales"
+"Carpathian Mountains","Ukraine",
+"Cartagena","Colombia",
+"Casablanca","Morocco",
+"Cascade Mountain Range","United States of America","Washington"
+"Castries","St Lucia",
+"Cayman Brac","Cayman Islands",
+"Cebu","Philippines",
+"Central Coast","United States of America","California"
+"Central Pacific Coast","Costa Rica",
+"Cephalonia","Greece",
+"Champagne Country","France",
+"Charleston","United States of America","South Carolina"
+"Charleston West Virginia","United States of America","West Virginia"
+"Charlotte","United States of America","North Carolina"
+"Charlottetown","Canada","Prince Edward Island"
+"Chengdu","China",
+"Chennai","India",
+"Cheyenne","United States of America","Wyoming"
+"Chiang Mai","Thailand",
+"Chiang Rai","Thailand",
+"Chicago","United States of America","Illinois"
+"Chilean Patagonia","Chile",
+"Chincoteague Island","United States of America","Virginia"
+"Chiriqui","Panama",
+"Christchurch","New Zealand",
+"Civitavecchia","Italy",
+"Cleveland","United States of America","Ohio"
+"Cody","United States of America","Wyoming"
+"Coimbra","Portugal",
+"Cologne","Germany",
+"Colombo","Sri Lanka",
+"Colorado Springs","United States of America","Colorado"
+"Copenhagen","Denmark",
+"Cordoba","Argentina",
+"Corfu","Greece",
+"Cork","Ireland",
+"Corsica","France",
+"Costa Almeria","Spain",
+"Costa Blanca","Spain",
+"Costa Brava","Spain",
+"Costa de la Luz","Spain",
+"Costa del Sol","Spain",
+"Costa do Estoril","Portugal",
+"Costa Dorada","Spain",
+"Cote d Azur","France",
+"Crete","Greece",
+"Crimea","Ukraine",
+"Cultural Triangle","Sri Lanka",
+"Curitiba","Brazil",
+"Cuzco","Peru",
+"Da Lat","Vietnam",
+"Da Nang","Vietnam",
+"Dakar","Senegal",
+"Dallas-Fort Worth","United States of America","Texas"
+"Dalmatian Coast","Croatia",
+"Damascus","Syria",
+"Dammam","Saudi Arabia",
+"Dar Es Salaam","Tanzania",
+"Darjeeling","India",
+"Darwin","Australia","Northern Territory"
+"Davao","Philippines",
+"Delft","Netherlands",
+"Delhi","India",
+"Denver","United States of America","Colorado"
+"Des Moines","United States of America","Iowa"
+"Detroit","United States of America","Michigan"
+"Dhaka","Bangladesh",
+"Doha","Qatar",
+"Door County","United States of America","Wisconsin"
+"Dordogne and Lot","France",
+"Dresden","Germany",
+"Dubai","United Arab Emirates",
+"Dublin","Ireland",
+"Dubrovnik","Croatia",
+"Duluth","United States of America","Minnesota"
+"Durban","South Africa",
+"Durham","United Kingdom","England"
+"Dusseldorf","Germany",
+"East Anglia","United Kingdom","England"
+"East Coast","Dominican Republic",
+"East London","South Africa",
+"Easter Island","Chile",
+"Eastern Shore","United States of America","Maryland"
+"Edinburgh","United Kingdom","Scotland"
+"Edmonton","Canada","Alberta"
+"Eger","Hungary",
+"Eindhoven","Netherlands",
+"Entebbe","Uganda",
+"Etosha National Park","Namibia",
+"Fairbanks","United States of America","Alaska"
+"Fajardo","Puerto Rico",
+"Fargo","United States of America","North Dakota"
+"Faro","Portugal",
+"Fez","Morocco",
+"Fianarantsoa","Madagascar",
+"Fish River Canyon","Namibia",
+"Fjordland","New Zealand",
+"Florence","Italy",
+"Flores","Indonesia",
+"Florianopolis","Brazil",
+"Florida Keys","United States of America","Florida"
+"Fort de France","Martinique",
+"Fort Lauderdale","United States of America","Florida"
+"Fortaleza","Brazil",
+"Frankfurt","Germany",
+"Fraser Coast","Australia","Queensland"
+"Freetown","Sierra Leone",
+"French Alps","France",
+"Fuerteventura","Spain",
+"Fukuoka","Japan",
+"Funchal","Portugal",
+"Gaborone","Botswana",
+"Galapagos Islands","Ecuador",
+"Galilee","Israel",
+"Galveston","United States of America","Texas"
+"Galway","Ireland",
+"Garden Route","South Africa",
+"Gdansk","Poland",
+"Geneva","Switzerland",
+"Genoa","Italy",
+"Ghent","Belgium",
+"Glasgow","United Kingdom","Scotland"
+"Goa","India",
+"Gold Coast","United States of America","Florida"
+"Gold Coast, Queensland","Australia","Queensland"
+"Gothenburg","Sweden",
+"Gozo","Malta",
+"Gran Canaria","Spain",
+"Grand Cayman","Cayman Islands",
+"Grand Strand and Myrtle Beach","United States of America","South Carolina"
+"Grand Turk","Turks and Caicos Islands",
+"Grandvalira","Andorra",
+"Groningen","Netherlands",
+"Guadalajara","Mexico",
+"Guadalcanal Island","Solomon Islands",
+"Guangzhou","China",
+"Guatemala City","Guatemala",
+"Guernsey","United Kingdom","Channel Islands"
+"Guilin","China",
+"Gulf Coast","United States of America","Florida"
+"Gulfport","United States of America","Mississippi"
+"Gyeongju","South Korea",
+"Haifa","Israel",
+"Halifax","Canada","Nova Scotia"
+"Hamburg","Germany",
+"Hamilton","Bermuda",
+"Hangzhou","China",
+"Hannover","Germany",
+"Hanoi","Vietnam",
+"Harare","Zimbabwe",
+"Harpers Ferry","United States of America","West Virginia"
+"Hartford","United States of America","Connecticut"
+"Havana","Cuba",
+"Helsinki","Finland",
+"Hill Resorts","Malaysia",
+"Himalayas","Nepal",
+"Hiroshima","Japan",
+"Ho Chi Minh City","Vietnam",
+"Hobart","Australia","Tasmania"
+"Hoi An","Vietnam",
+"Hong Kong City","Hong Kong",
+"Honolulu","United States of America","Hawaii"
+"Houston","United States of America","Texas"
+"Huaraz Region","Peru",
+"Hudson Valley and the Catskills","United States of America","New York"
+"Hue","Vietnam",
+"Hyderabad","India",
+"Ibiza","Spain",
+"Indianapolis","United States of America","Indiana"
+"Inhambane","Mozambique",
+"Innsbruck","Austria",
+"Inverness","United Kingdom","Scotland"
+"Iowa City","United States of America","Iowa"
+"Isaan","Thailand",
+"Isla Grande de Chiloe","Chile",
+"Isla Margarita","Venezuela",
+"Islamabad","Pakistan",
+"Islands","Malaysia",
+"Islay","United Kingdom","Scotland"
+"Isle of Arran","United Kingdom","Scotland"
+"Isle of Mull","United Kingdom","Scotland"
+"Isle of Wight","United Kingdom","England"
+"Istanbul","Turkey",
+"Italian Alps","Italy",
+"Jackson Mississippi","United States of America","Mississippi"
+"Jackson Wyoming","United States of America","Wyoming"
+"Jacksonville","United States of America","Florida"
+"Jaipur","India",
+"Jakarta","Indonesia",
+"Java","Indonesia",
+"Jeddah","Saudi Arabia",
+"Jersey","United Kingdom","Channel Islands"
+"Jerusalem","Israel",
+"Johannesburg","South Africa",
+"Juneau","United States of America","Alaska"
+"Kalamata","Greece",
+"Kaliningrad Oblast","Russia",
+"Kampala","Uganda",
+"Kansas City","United States of America","Missouri"
+"Karachi","Pakistan",
+"Kariba","Zimbabwe",
+"Kathmandu","Nepal",
+"Kauai","United States of America","Hawaii"
+"Kerala","India",
+"Ketchikan","United States of America","Alaska"
+"Khartoum","Sudan",
+"Kiev","Ukraine",
+"Kigali","Rwanda",
+"Killarney","Ireland",
+"Kimberley","South Africa",
+"Kingston","Jamaica",
+"Kiruna","Sweden",
+"Kochi","India",
+"Kolkata","India",
+"Kos","Greece",
+"Kotor","Montenegro",
+"Krakow","Poland",
+"Kruger National Park","South Africa",
+"Kuala Lumpur","Malaysia",
+"Kunming","China",
+"Kyoto","Japan",
+"La Coruna","Spain",
+"La Digue","Seychelles",
+"La Paz","Bolivia",
+"La Romana","Dominican Republic",
+"Ladakh","India",
+"Lagos","Nigeria",
+"Lahore","Pakistan",
+"Lake Atitlan","Guatemala",
+"Lake Balaton","Hungary",
+"Lake Country","Italy",
+"Lake District","Chile",
+"Lake Erie Islands","United States of America","Ohio"
+"Lake Malawi","Malawi",
+"Lake Superior and Thunder Bay","Canada","Ontario"
+"Lake Titicaca","Peru",
+"Lake Titicaca Bolivia","Bolivia",
+"Lanai","United States of America","Hawaii"
+"Lanzarote","Spain",
+"Larnaca","Cyprus",
+"Las Palmas","Spain",
+"Las Vegas","United States of America","Nevada"
+"Leeds","United Kingdom","England"
+"Lesvos","Greece",
+"Lille","France",
+"Lilongwe","Malawi",
+"Lima","Peru",
+"Limassol","Cyprus",
+"Limerick","Ireland",
+"Lisbon","Portugal",
+"Little Cayman","Cayman Islands",
+"Little Rock","United States of America","Arkansas"
+"Liverpool","United Kingdom","England"
+"Ljubljana","Slovenia",
+"Llandudno","United Kingdom","Wales"
+"Loire Valley","France",
+"Lombok","Indonesia",
+"London","United Kingdom","England"
+"Long Island","United States of America","New York"
+"Los Angeles","United States of America","California"
+"Louisville","United States of America","Kentucky"
+"Luanda","Angola",
+"Luang Prabang","Laos",
+"Lusaka","Zambia",
+"Luxembourg-Ville","Luxembourg",
+"Luxor","Egypt",
+"Luzern","Switzerland",
+"Lyon","France",
+"Mackay","Australia","Queensland"
+"Mackinaw City","United States of America","Michigan"
+"Madeira","Portugal",
+"Madison","United States of America","Wisconsin"
+"Madrid","Spain",
+"Mahe","Seychelles",
+"Maine Ski Resorts","United States of America","Maine"
+"Malaga","Spain",
+"Male","Maldives",
+"Mallorca","Spain",
+"Malmo","Sweden",
+"Managua","Nicaragua",
+"Manama","Bahrain",
+"Manchester","United Kingdom","England"
+"Manchester NH","United States of America","New Hampshire"
+"Manila","Philippines",
+"Maputo","Mozambique",
+"Marigot","St Martin",
+"Marrakech","Morocco",
+"Marseille","France",
+"Maseru","Lesotho",
+"Matara","Sri Lanka",
+"Maui","United States of America","Hawaii"
+"Mediterranean Coast","Turkey",
+"Melbourne","Australia","Victoria"
+"Memphis","United States of America","Tennessee"
+"Mexico City","Mexico",
+"Miami","United States of America","Florida"
+"Milan","Italy",
+"Milwaukee","United States of America","Wisconsin"
+"Minneapolis-St Paul","United States of America","Minnesota"
+"Minorca","Spain",
+"Minsk","Belarus",
+"Mobile","United States of America","Alabama"
+"Molokai","United States of America","Hawaii"
+"Monrovia","Liberia",
+"Monte-Carlo","Monaco",
+"Montego Bay","Jamaica",
+"Montevideo","Uruguay",
+"Montgomery","United States of America","Alabama"
+"Montgomery County","United States of America","Maryland"
+"Montpelier","United States of America","Vermont"
+"Montreal","Canada","Quebec"
+"Moorea","Tahiti and French Polynesia",
+"Moscow","Russia",
+"Mount Desert Island","United States of America","Maine"
+"Mountains","Bulgaria",
+"Mpumalanga","South Africa",
+"Mumbai","India",
+"Munich","Germany",
+"Muscat","Oman",
+"Mykonos","Greece",
+"Nairobi","Kenya",
+"Naples","Italy",
+"Nashville","United States of America","Tennessee"
+"Nassau","Bahamas",
+"Natchez","United States of America","Mississippi"
+"National Parks and Reserves","Tanzania",
+"Negril","Jamaica",
+"Nevis","St Kitts and Nevis",
+"New Haven","United States of America","Connecticut"
+"New Jersey Shore","United States of America","New Jersey"
+"New Orleans","United States of America","Louisiana"
+"New York City","United States of America","New York"
+"Newcastle-Upon-Tyne","United Kingdom","England"
+"Newport","United States of America","Rhode Island"
+"Nha Trang","Vietnam",
+"Nicosia","Cyprus",
+"Norfolk","United States of America","Virginia"
+"Normandy","France",
+"North Carolina Coast","United States of America","North Carolina"
+"North Coast Redwoods District","United States of America","California"
+"North Island","New Zealand",
+"Northern Argentina","Argentina",
+"Northern Cyprus","Cyprus",
+"Northern Wales","United Kingdom","Wales"
+"Northwest Costa Rica","Costa Rica",
+"Nosy Be","Madagascar",
+"Nottingham","United Kingdom","England"
+"Oahu","United States of America","Hawaii"
+"Oaxaca","Mexico",
+"Ocho Rios","Jamaica",
+"Odessa","Ukraine",
+"Okavango Delta","Botswana",
+"Oklahoma City","United States of America","Oklahoma"
+"Omaha","United States of America","Nebraska"
+"Oranjestad","Aruba",
+"Orlando","United States of America","Florida"
+"Osaka","Japan",
+"Oslo","Norway",
+"Ottawa","Canada","Ontario"
+"Oudtshoorn","South Africa",
+"Outer Hebrides","United Kingdom","Scotland"
+"Oviedo","Spain",
+"Oxford","United Kingdom","England"
+"Pacific Coast","Mexico",
+"Palermo","Italy",
+"Palma de Mallorca","Spain",
+"Panama Canal","Panama",
+"Panama City","Panama",
+"Paphos","Cyprus",
+"Paramaribo","Suriname",
+"Paris","France",
+"Patmos","Greece",
+"Peloponnese Peninsula","Greece",
+"Pemba and Northern Mozambique","Mozambique",
+"Pensacola","United States of America","Florida"
+"Perth","Australia","Western Australia"
+"Petra","Jordan",
+"Philadelphia","United States of America","Pennsylvania"
+"Philipsburg","St Maarten and St Martin",
+"Phillip Island and Gippsland","Australia","Victoria"
+"Phnom Penh","Cambodia",
+"Phoenix","United States of America","Arizona"
+"Phu Quoc","Vietnam",
+"Phuket","Thailand",
+"Pisa","Italy",
+"Pittsburgh","United States of America","Pennsylvania"
+"Plymouth","United Kingdom","England"
+"Pokhara","Nepal",
+"Ponce","Puerto Rico",
+"Port Antonio","Jamaica",
+"Port Elizabeth","South Africa",
+"Port Louis","Mauritius",
+"Port of Spain","Trinidad and Tobago",
+"Portland","United States of America","Maine"
+"Portland Oregon","United States of America","Oregon"
+"Porto","Portugal",
+"Potosi","Bolivia",
+"Prague","Czech Republic",
+"Praslin Island","Seychelles",
+"Pretoria","South Africa",
+"Provence","France",
+"Providence","United States of America","Rhode Island"
+"Providenciales","Turks and Caicos Islands",
+"Puerto Limon","Costa Rica",
+"Pushkar","India",
+"Quebec City","Canada","Quebec"
+"Queenstown","New Zealand",
+"Quito","Ecuador",
+"Rabat","Morocco",
+"Raleigh","United States of America","North Carolina"
+"Rangiroa","Tahiti and French Polynesia",
+"Rarotonga","Cook Islands",
+"Recife","Brazil",
+"Regina","Canada","Saskatchewan"
+"Reno","United States of America","Nevada"
+"Resort Islands","Maldives",
+"Reykjavik","Iceland",
+"Rhodes","Greece",
+"Richmond","United States of America","Virginia"
+"Riga","Latvia",
+"Rio de Janeiro","Brazil",
+"Riyadh","Saudi Arabia",
+"Rocky Mountains","United States of America","Colorado"
+"Rome","Italy",
+"Roseau","Dominica",
+"Roskilde","Denmark",
+"Rotterdam","Netherlands",
+"Russian Far East","Russia",
+"Sabah","Malaysia",
+"Saint George","Bermuda",
+"Saint-Denis","Reunion",
+"Sal","Cape Verde",
+"Salt Lake City","United States of America","Utah"
+"Salvador da Bahia","Brazil",
+"Salzburg","Austria",
+"Samos","Greece",
+"San Antonio","United States of America","Texas"
+"San Cristobal de las Casas","Mexico",
+"San Diego","United States of America","California"
+"San Francisco","United States of America","California"
+"San Jose","United States of America","California"
+"San Jose Costa Rica","Costa Rica",
+"San Juan","Puerto Rico",
+"San Miguel de Allende","Mexico",
+"San Pedro de Atacama","Chile",
+"Santa Cruz de la Sierra","Bolivia",
+"Santa Fe","United States of America","New Mexico"
+"Santiago","Chile",
+"Santiago de Compostela","Spain",
+"Santiago de Cuba","Cuba",
+"Santiago Island","Cape Verde",
+"Santo Antao","Cape Verde",
+"Santo Domingo","Dominican Republic",
+"Santorini","Greece",
+"Sao Luis","Brazil",
+"Sao Paulo","Brazil",
+"Sao Vicente","Cape Verde",
+"Sapporo","Japan",
+"Sarawak","Malaysia",
+"Sardinia","Italy",
+"Sark","United Kingdom","Channel Islands"
+"Saronic Gulf Islands","Greece",
+"Savannah","United States of America","Georgia"
+"Seattle","United States of America","Washington"
+"Sedona","United States of America","Arizona"
+"Seoul","South Korea",
+"Seville","Spain",
+"Shanghai","China",
+"Shannon","Ireland",
+"Sharjah","United Arab Emirates",
+"Shenandoah Valley","United States of America","Virginia"
+"Shikoku","Japan",
+"Sicily","Italy",
+"Siem Reap","Cambodia",
+"Singapore","Singapore",
+"Skagway","United States of America","Alaska"
+"Ski Resorts","Canada","British Columbia"
+"Skiathos","Greece",
+"Skopelos","Greece",
+"Sochi","Russia",
+"Sofia","Bulgaria",
+"South Coast","Jamaica",
+"South Island","New Zealand",
+"Southern Argentina","Argentina",
+"Southern Bucovina","Romania",
+"Southern National Parks","United States of America","Utah"
+"Southwest England","United Kingdom","England"
+"Split","Croatia",
+"Springfield","United States of America","Illinois"
+"St Croix","US Virgin Islands",
+"St John","US Virgin Islands",
+"St Johns","Canada","Newfoundland And Labrador"
+"St Johns Antigua","Antigua and Barbuda",
+"St Kitts","St Kitts and Nevis",
+"St Louis","United States of America","Missouri"
+"St Petersburg","Russia",
+"St Petersburg Florida","United States of America","Florida"
+"St Thomas","US Virgin Islands",
+"Stavanger","Norway",
+"Stockholm","Sweden",
+"Stuttgart","Germany",
+"Sucre","Bolivia",
+"Sumatra","Indonesia",
+"Sunshine Coast","Australia","Queensland"
+"Swansea","United Kingdom","Wales"
+"Swiss Alps","Switzerland",
+"Sydney","Australia","New South Wales"
+"Sylhet","Bangladesh",
+"Tahiti","Tahiti and French Polynesia",
+"Taipei","Taiwan",
+"Tallinn","Estonia",
+"Tampa","United States of America","Florida"
+"Tangier","Morocco",
+"Tashkent","Uzbekistan",
+"Tbilisi","Georgia Republic",
+"Tehran","Iran",
+"Tel Aviv","Israel",
+"Tenby","United Kingdom","Wales"
+"Tenerife","Spain",
+"Thassos","Greece",
+"The Algarve","Portugal",
+"The Amazon","Brazil",
+"The Andes","Argentina",
+"The Azores","Portugal",
+"The Berkshire Hills","United States of America","Massachusetts"
+"The Black Forest","Germany",
+"The Caribbean Lowlands","Costa Rica",
+"The Coast","Thailand",
+"The Copper Canyon","Mexico",
+"The Cotswolds","United Kingdom","England"
+"The Danube Bend","Hungary",
+"The East Coast","Tunisia",
+"The Great Rift Valley","Kenya",
+"The Highlands","United Kingdom","Scotland"
+"The Inside Passage","United States of America","Alaska"
+"The Islands","Bahamas",
+"The Kenyan Coast","Kenya",
+"The Lake District","United Kingdom","England"
+"The Namib Desert","Namibia",
+"The New Territories","Hong Kong",
+"The Nile Valley","Egypt",
+"The Rhineland","Germany",
+"The Romantic Road","Germany",
+"The Sinai Peninsula and the Red Sea","Egypt",
+"The Valley","Anguilla",
+"Thessaloniki","Greece",
+"Thimphu","Bhutan",
+"Thunder Bay","Canada","Ontario"
+"Tibet","China",
+"Tijuana","Mexico",
+"Tokyo","Japan",
+"Toronto","Canada","Ontario"
+"Tortola","British Virgin Islands",
+"Toulouse","France",
+"Townsville","Australia","Queensland"
+"Transkei","South Africa",
+"Transylvania","Romania",
+"Trinidad","Cuba",
+"Tripoli","Libya",
+"Tromso","Norway",
+"Trondheim","Norway",
+"Tucson","United States of America","Arizona"
+"Tulsa","United States of America","Oklahoma"
+"Tunis","Tunisia",
+"Tuscany","Italy",
+"Udaipur","India",
+"Umbria","Italy",
+"Uppsala","Sweden",
+"Valencia","Spain",
+"Valletta","Malta",
+"Vancouver","Canada","British Columbia"
+"Vancouver Island","Canada","British Columbia"
+"Vang Vieng","Laos",
+"Varanasi","India",
+"Venice","Italy",
+"Vermont Ski Resorts","United States of America","Vermont"
+"Verona","Italy",
+"Victoria Falls","Zimbabwe",
+"Vienna","Austria",
+"Vientiane","Laos",
+"Vigo","Spain",
+"Vilnius","Lithuania",
+"Vinales Valley","Cuba",
+"Virgin Gorda","British Virgin Islands",
+"Virginia Coast","United States of America","Virginia"
+"Vitoria","Brazil",
+"Vojvodina","Serbia",
+"Walvis Bay","Namibia",
+"Warsaw","Poland",
+"Washington DC","United States of America","Washington DC"
+"Wellington","New Zealand",
+"West Coast","South Africa",
+"West Okoboji Lake","United States of America","Iowa"
+"Western Maryland","United States of America","Maryland"
+"Western New York State","United States of America","New York"
+"Whitehorse","Canada","Yukon Territory"
+"Whitsunday Islands","Australia","Queensland"
+"Wilmington","United States of America","Delaware"
+"Windhoek","Namibia",
+"Winnipeg","Canada","Manitoba"
+"Xi An","China",
+"Yangon","Republic of the Union of Myanmar",
+"Yellowknife","Canada","Northwest Territories"
+"Yerevan","Armenia",
+"Yogyakarta","Indonesia",
+"York","United Kingdom","England"
+"Yucatan Peninsula","Mexico",
+"Zagreb","Croatia",
+"Zakynthos","Greece",
+"Zanzibar","Tanzania",
+"Zurich","Switzerland",
