@@ -2,6 +2,8 @@
 
 //This program will include a external json file - rezdytours.json as the updateing source for taxonomy Tour Destination, Themes and Price 
 //if you want to update taxonomy Tour Type and Tour Category, you should use another one - updateToursTXTourTypeCategory.js
+//
+//csvtojson --delimiter=';' data/csv/20170704RTours.csv > mapping/rezdytours.json
 
 var fs = require('fs');
 var debug = require('debug');
@@ -227,7 +229,7 @@ var dataValidation = () => {
 	fs.writeFileSync('./mapping/themes.json', JSON.stringify(themesJson));
 
 	if(txShouldBeInserted){
-		console.log('****** There still are taxonomy data which should be dealed with! Please excute "updateTXThemesCityTourTypeCatDest.js"!! ******');
+		console.log('****** There still are taxonomy data which should be dealed with! Please excute "updateTXTerms.js"!! ******');
 		endProgram();
 	} else {
 		dataProcessing();
@@ -449,7 +451,7 @@ var dataProcessing = () => {
 }
 
 var endProgram = () => {
-	console.log('*** updateRezdyToursTXThemesTourDestCity.js Finished!! ***');	
+	console.log('*** updateRezdyToursTXThemesTourDestPrice.js Finished!! ***');	
 }
 
 //Starting point

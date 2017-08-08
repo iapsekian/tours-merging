@@ -2,47 +2,49 @@
 var fs = require('fs');
 var debug = require('debug');
 
-/*
+
 var TXMapping = require('./lib/getTXTermsMap.js');
 options = {
-	//'txVocName': ['City','Tour Destination'],
-	txVocName: [],
+	'txVocName': ['Tour Category','Tour Type','iso world region','City','Neighborhood','Country','State / Province'],
+	// txVocName: [],
 	txTermsFlag: false,
 	//reversedListing: true,
 	targetEnv: 'PRODUCTION',
 	dbOPSwitch: ''
 };
 TXMapping(options, (txVocId,txTermsId)=>{
-	// fs.writeFileSync('./logs/txType-TEST.json', JSON.stringify(txVocId));
-	// fs.writeFileSync('./logs/txTerms-TEST.json', JSON.stringify(txTermsId));
+	fs.writeFileSync('./logs/txType-'+options.targetEnv+'.json', JSON.stringify(txVocId));
+	fs.writeFileSync('./logs/txTerms-'+options.targetEnv+'.json', JSON.stringify(txTermsId));
 	console.log('FINISHED!');
 });
-*/
 
+
+/*
 var typeId = {}
 var getContentTypesId = require('./lib/getContentTypeId.js');
 options1 = {
-	'ctnTypeName': ['Country','City'],
+	'ctnTypeName': ['Tours'],
 	// 'ctnTypeName': [],
 	'targetEnv': '',
 	'dbOPSwitch': ''
 };
 getContentTypesId(options1, (a)=>{
 	var typeId = a;
+	console.log(JSON.stringify(typeId));
 
-	var getContents = require('./lib/getContents.js');
-	options2 = {
-		ctnTypeId: typeId,
-		projection: {'_id':1, 'text': 1, 'workspace':1},
-		// projection: {'_id':1, 'text': 1},
-		targetEnv: '',
-		dbOPSwitch: ''
-	};
-	getContents(options2, (a)=>{
-		fs.writeFileSync('./logs/contents-TEST.json', JSON.stringify(a));
-	});
+	// var getContents = require('./lib/getContents.js');
+	// options2 = {
+	// 	ctnTypeId: typeId,
+	// 	projection: {'_id':1, 'text': 1, 'workspace':1},
+	// 	// projection: {'_id':1, 'text': 1},
+	// 	targetEnv: '',
+	// 	dbOPSwitch: ''
+	// };
+	// getContents(options2, (a)=>{
+	// 	fs.writeFileSync('./logs/contents-TEST.json', JSON.stringify(a));
+	// });
 });
-
+*/
 /*
 var getTargetTourCategory = require('./lib/getTargetTourCategory.js');
 console.log('Target Tour Category = ' + getTargetTourCategory("4-Day Tours"));
