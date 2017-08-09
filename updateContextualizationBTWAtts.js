@@ -62,6 +62,10 @@ if(productionEnv){
 	var mdbUrl = 'mongodb://tst.tourbooks.cc:27017/tourbooks';
 }
 
+if(!operateDB){
+	var result = []
+}
+
 //base configuration
 
 var txVocName = ['Attraction'];
@@ -97,6 +101,7 @@ var cleanArray = (orig, callback) => {
 
 
 var dataPreparation = () => {
+	console.log('Enter dataPreparation() ......');
 
 	var dataReadyCount = 2;
 	var wait4DataReady = () => {
@@ -144,6 +149,7 @@ var dataPreparation = () => {
 }
 
 var dataValidation = () => {
+	console.log('Enter dataValidation() .....');
 	var txAttractionValidationLog = '';
 	var attsJson = [];
 	var txShouldBeInserted = false;
@@ -180,6 +186,7 @@ var dataValidation = () => {
 }
 
 var dataProcessing = () => {
+	console.log('Enter dataProcessing() .....');
 	var allContents = Object.keys(contents);
 	var allContentsCount = allContents.length;
 	var txVocs = Object.keys(txVocId);
@@ -206,12 +213,14 @@ var dataProcessing = () => {
 				var wait4ctnsEnd = () => {
 					ctnsCount--;
 					if(!ctnsCount){
-						fs.writeFileSync('./logs/ContentsUpdatingLog-'+key+'-'+targetEnv+'.log', ctnsUpdLog);
+						fs.writeFileSync('./logs/updateContextualizationBTWAtts-'+key+'-'+targetEnv+'.log', ctnsUpdLog);
+						fs.writeFileSync('./logs/updateContextualizationBTWAtts-'+key+'-'+targetEnv+'.json', JSON.stringify(result));
 						wait4AllContentsEnd();
 					}
 				}
 
 				ctns.forEach( (ctn) => {
+					console.log('Key = %s - Text = %s', key, ctn.text);
 					var text = ctn.text;
 					var updFlag = false;
 					txVocs.forEach( (txVoc) => {
@@ -260,17 +269,22 @@ var dataProcessing = () => {
 						updateField.live = ctn.workspace;
 						var update = { $set: updateField };
 
-						cltContents.updateOne(filter, update)
-							.then((r) => {
-								debugDev('Content - ' + key + ': ' + text + ' has been updated successfully!');
-								ctnsUpdLog += 'Content - ' + key + ': ' + text + ' has been updated successfully!\n';
-								wait4ctnsEnd();
-							})
-							.catch((e) => {
-								console.log('Update - '+ key + ': ' + text +' - error happened!! - %s',e);
-								ctnsUpdLog += 'Content - ' + key + ': ' + text + ' - error happened during updating!! - ' + e + '\n';
-								wait4ctnsEnd();
-							});
+						if(operateDB){
+							cltContents.updateOne(filter, update)
+								.then((r) => {
+									debugDev('Content - ' + key + ': ' + text + ' has been updated successfully!');
+									ctnsUpdLog += 'Content - ' + key + ': ' + text + ' has been updated successfully!\n';
+									wait4ctnsEnd();
+								})
+								.catch((e) => {
+									console.log('Update - '+ key + ': ' + text +' - error happened!! - %s',e);
+									ctnsUpdLog += 'Content - ' + key + ': ' + text + ' - error happened during updating!! - ' + e + '\n';
+									wait4ctnsEnd();
+								});
+						} else{
+							result.push(ctn.text);
+							wait4ctnsEnd();
+						}
 					} else {
 						wait4ctnsEnd();
 					}
@@ -286,18 +300,19 @@ var dataProcessing = () => {
 
 	// dataProcessing() starting point
 	if(allContentsCount){
-		if(operateDB){
-			start();
-		} else {
-			endProgram();
-		}
+		start();
+		// if(operateDB){
+		// 	start();
+		// } else {
+		// 	endProgram();
+		// }
 	} else {
 		endProgram();
 	}
 }
 
 var endProgram = () => {
-	console.log('*** updateCityTXTourDestCity.js Finished!! ***');	
+	console.log('*** updateContextualizationBTWAtts.js Finished!! ***');	
 }
 
 //Starting point
