@@ -4,3 +4,6 @@
 node_modules/*
 trial/*
 logs/*
+log/
+*.log
+package-lock.json
