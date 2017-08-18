@@ -157,6 +157,9 @@ var dataValidation = () => {
 		var key = typeName.replace(/\s+/g,'');
 		var ctns = contents[key];
 		ctns.forEach( (ctn) => {
+			if(ctn.text === 'Lagos, Portugal'){
+				console.log('bp1...');
+			}
 			txVocName.forEach( (vocName) => {
 				var vocKey = vocName.replace(/\s+/g,'');
 				if(!txTermsId[vocKey][ctn.text]){

@@ -57,7 +57,7 @@ if('PRODUCTION' === targetEnv){
 //DB definition/value
 
 if(productionEnv){
-	var mdbUrl = 'mongodb://52.39.111.227:27017/tourbooks';
+	var mdbUrl = 'mongodb://52.25.67.91:27017/bookurdb';
 } else if (testEnv){
 	var mdbUrl = 'mongodb://tst.tourbooks.cc:27017/tourbooks';
 }
